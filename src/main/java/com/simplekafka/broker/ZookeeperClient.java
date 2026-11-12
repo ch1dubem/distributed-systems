@@ -105,6 +105,11 @@ public final class ZookeeperClient implements AutoCloseable {
         return client().exists(path, false) != null;
     }
 
+    public List<String> listChildren(String path) throws KeeperException, InterruptedException {
+        if (path == null || path.isEmpty()) throw new IllegalArgumentException("path must not be blank");
+        return Collections.unmodifiableList(new ArrayList<>(client().getChildren(path, false)));
+    }
+
     /** Installs a one-shot child watch again after every child change. */
     public void watchChildren(String path, Consumer<List<String>> callback)
             throws KeeperException, InterruptedException {
