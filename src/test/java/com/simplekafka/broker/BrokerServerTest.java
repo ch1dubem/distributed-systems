@@ -64,6 +64,10 @@ class BrokerServerTest {
                     assertEquals(1, response.readInt());
                     assertEquals("orders", readString(response));
                     assertEquals(2, response.readInt());
+                    assertEquals(0, response.readInt());
+                    assertEquals(1, response.readInt());
+                    assertEquals(1, response.readInt());
+                    assertEquals(1, response.readInt());
                 }
             }
         }

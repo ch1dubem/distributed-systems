@@ -277,7 +277,12 @@ public final class BrokerServer implements AutoCloseable {
         output.writeInt(topicNames.size());
         for (String topicName : topicNames) {
             writeTopic(output, topicName);
-            output.writeInt(topics.get(topicName).states.size());
+            List<PartitionState> partitions = topics.get(topicName).states;
+            output.writeInt(partitions.size());
+            for (PartitionState partition : partitions) {
+                output.writeInt(partition.partitionId);
+                output.writeInt(partition.leaderId);
+            }
         }
     }
 
